@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class Bookshelf extends React.Component {
+class Book extends React.Component {
   static propTypes = {
     book: PropTypes.shape({
       authors: PropTypes.array.isRequired,
@@ -35,4 +35,4 @@ class Bookshelf extends React.Component {
   }
 }
 
-export default Bookshelf
+export default Book
