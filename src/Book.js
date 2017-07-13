@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class Book extends React.Component {
   static propTypes = {
     book: PropTypes.shape({
-      authors: PropTypes.array.isRequired,
+      authors: PropTypes.array,
       imageLinks: PropTypes.shape({
         thumbnail: PropTypes.string.isRequired
       }).isRequired,
@@ -34,7 +34,9 @@ class Book extends React.Component {
           </div>
         </div>
         <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.authors.join(', ')}</div>
+        {book.authors &&
+          <div className="book-authors">{book.authors.join(', ')}</div>
+        }
       </div>
     )
   }

@@ -19,7 +19,6 @@ class Search extends React.Component {
     this.setState({query})
     BooksAPI.search(this.state.query, 20).then((results) => {
       results && this.setState({results})
-      console.log(results)
     })
   }
 
@@ -44,10 +43,10 @@ class Search extends React.Component {
           <ol className="books-grid">
             {results && results.map((book) => (
               <li key={book.id}>
-                {/* <Book
+                <Book
                   book={book}
                   handleChange={this.props.shelfChange}
-                /> */}
+                />
               </li>
             ))}
           </ol>
