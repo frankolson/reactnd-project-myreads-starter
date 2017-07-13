@@ -9,7 +9,12 @@ class Book extends React.Component {
         thumbnail: PropTypes.string.isRequired
       }).isRequired,
       title: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    handleChange: PropTypes.func.isRequired
+  }
+
+  handleChange = (event) => {
+    this.props.handleChange(this.props.book, event.target.value)
   }
 
   render() {
@@ -19,7 +24,7 @@ class Book extends React.Component {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
           <div className="book-shelf-changer">
-            <select value={book.shelf || 'none'}>
+            <select value={book.shelf || 'none'} onChange={this.handleChange}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>

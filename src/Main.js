@@ -7,8 +7,9 @@ import Bookshelf from './Bookshelf'
 class Main extends React.Component {
   static propTypes = {
     books: PropTypes.arrayOf(PropTypes.shape({
-       shelf: PropTypes.string.isRequired
-     }))
+      shelf: PropTypes.string.isRequired
+    })),
+    shelfChange: PropTypes.func.isRequired
   }
 
   render() {
@@ -25,14 +26,17 @@ class Main extends React.Component {
             <Bookshelf
               title="Currently Reading"
               books={currentlyReading}
+              shelfChange={this.props.shelfChange}
             />
             <Bookshelf
               title="Read"
               books={read}
+              shelfChange={this.props.shelfChange}
             />
             <Bookshelf
               title="Want to Read"
               books={wantToRead}
+              shelfChange={this.props.shelfChange}
             />
           </div>
         </div>
