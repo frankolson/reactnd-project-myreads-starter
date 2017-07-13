@@ -8,7 +8,6 @@ import Book from './Book'
 class Search extends React.Component {
   state = {
     results: [],
-    query: ""
   }
 
   static propTypes = {
@@ -16,9 +15,12 @@ class Search extends React.Component {
   }
 
   search = (query) => {
-    this.setState({query})
-    BooksAPI.search(this.state.query, 20).then((results) => {
-      results && this.setState({results})
+    BooksAPI.search(query, 20).then((results) => {
+      if (results.error) {
+        this.setState({results: results.items})
+      } else {
+        this.setState({results})
+      }
     })
   }
 
@@ -32,7 +34,6 @@ class Search extends React.Component {
           </Link>
           <div className="search-books-input-wrapper">
             <input
-              value={this.state.search}
               type="text"
               placeholder="Search by title or author"
               onChange={(event) => this.search(event.target.value)}
