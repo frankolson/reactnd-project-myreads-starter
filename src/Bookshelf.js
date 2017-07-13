@@ -8,6 +8,7 @@ class Bookshelf extends React.Component {
     shelfChange: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired
   }
+
   render() {
     return (
       <div className="bookshelf">
