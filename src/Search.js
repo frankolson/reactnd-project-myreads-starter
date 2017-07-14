@@ -12,7 +12,6 @@ class Search extends React.Component {
   }
 
   static propTypes = {
-    books: PropTypes.array.isRequired,
     getBookshelf: PropTypes.func.isRequired,
     shelfChange: PropTypes.func.isRequired
   }
