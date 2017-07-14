@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom'
 
 import Bookshelf from './Bookshelf'
 
-const Main = (props) => {
+const Main = ({books, getBookshelf, shelfChange}) => {
   const currentlyReading = (
-    props.books.filter((b) => b.shelf === 'currentlyReading')
+    books.filter((b) => b.shelf === 'currentlyReading')
   )
 
   const read = (
-    props.books.filter((b) => b.shelf === 'read')
+    books.filter((b) => b.shelf === 'read')
   )
 
   const wantToRead = (
-    props.books.filter((b) => b.shelf === 'wantToRead')
+    books.filter((b) => b.shelf === 'wantToRead')
   )
 
   return (
@@ -27,20 +27,20 @@ const Main = (props) => {
           <Bookshelf
             title="Currently Reading"
             books={currentlyReading}
-            getBookshelf={props.getBookshelf}
-            shelfChange={props.shelfChange}
+            getBookshelf={getBookshelf}
+            shelfChange={shelfChange}
           />
           <Bookshelf
             title="Read"
             books={read}
-            getBookshelf={props.getBookshelf}
-            shelfChange={props.shelfChange}
+            getBookshelf={getBookshelf}
+            shelfChange={shelfChange}
           />
           <Bookshelf
             title="Want to Read"
             books={wantToRead}
-            getBookshelf={props.getBookshelf}
-            shelfChange={props.shelfChange}
+            getBookshelf={getBookshelf}
+            shelfChange={shelfChange}
           />
         </div>
       </div>
