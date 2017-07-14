@@ -45,6 +45,8 @@ class Search extends React.Component {
         for (const book of this.props.books) {
           if (result.title === book.title) {
             result = book
+          } else {
+            result.shelf = 'none'
           }
         }
         return result
