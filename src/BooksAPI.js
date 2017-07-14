@@ -1,3 +1,4 @@
+import uniqBy from 'lodash/uniqBy'
 
 const api = "https://reactnd-books-api.udacity.com"
 
@@ -21,6 +22,7 @@ export const getAll = () =>
   fetch(`${api}/books`, { headers })
     .then(res => res.json())
     .then(data => data.books)
+    .then(books => uniqBy(books, 'id'))
 
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
@@ -42,3 +44,4 @@ export const search = (query, maxResults) =>
     body: JSON.stringify({ query, maxResults })
   }).then(res => res.json())
     .then(data => data.books)
+    .then(books => uniqBy(books, 'id'))
