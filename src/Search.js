@@ -13,6 +13,7 @@ class Search extends React.Component {
 
   static propTypes = {
     books: PropTypes.array.isRequired,
+    getBookshelf: PropTypes.func.isRequired,
     shelfChange: PropTypes.func.isRequired
   }
 
@@ -42,13 +43,7 @@ class Search extends React.Component {
   sortResults = (results) => {
     this.setState({
       results: results.map((result) => {
-        for (const book of this.props.books) {
-          if (result.title === book.title) {
-            result = book
-          } else {
-            result.shelf = 'none'
-          }
-        }
+        result.shelf = this.props.getBookshelf(result.id)
         return result
       })
     })
@@ -77,6 +72,7 @@ class Search extends React.Component {
               <li key={book.id}>
                 <Book
                   book={book}
+                  getBookshelf={this.props.getBookshelf}
                   handleChange={this.props.shelfChange}
                 />
               </li>

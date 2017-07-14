@@ -12,6 +12,7 @@ const Bookshelf = (props) => (
           <li key={book.id}>
             <Book
               book={book}
+              getBookshelf={props.getBookshelf}
               handleChange={props.shelfChange}
             />
           </li>
@@ -22,6 +23,7 @@ const Bookshelf = (props) => (
 )
 
 Bookshelf.propTypes = {
+  getBookshelf: PropTypes.func.isRequired,
   shelfChange: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired
 }

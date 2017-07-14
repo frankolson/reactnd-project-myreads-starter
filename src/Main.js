@@ -27,16 +27,19 @@ const Main = (props) => {
           <Bookshelf
             title="Currently Reading"
             books={currentlyReading}
+            getBookshelf={props.getBookshelf}
             shelfChange={props.shelfChange}
           />
           <Bookshelf
             title="Read"
             books={read}
+            getBookshelf={props.getBookshelf}
             shelfChange={props.shelfChange}
           />
           <Bookshelf
             title="Want to Read"
             books={wantToRead}
+            getBookshelf={props.getBookshelf}
             shelfChange={props.shelfChange}
           />
         </div>
@@ -54,6 +57,7 @@ Main.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({
     shelf: PropTypes.string.isRequired
   })),
+  getBookshelf: PropTypes.func.isRequired,
   shelfChange: PropTypes.func.isRequired
 }
 
