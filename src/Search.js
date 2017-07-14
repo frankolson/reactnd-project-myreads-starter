@@ -20,21 +20,22 @@ class Search extends React.Component {
   }
   
   callAjax = (query) => {
-    BooksAPI.search(query, 20).then((results) => {
-      if (results.error) {
-        this.setState({results: results.items})
-      } else {
-        this.setState({results})
-      }
-    })
-  }
-
-  search = (query) => {
     if (query !== "") {
-      this.callAjax(query)
+      BooksAPI.search(query, 20).then((results) => {
+        if (results.error) {
+          this.setState({results: results.items})
+        } else {
+          this.setState({results})
+        }
+      })
     } else {
       this.setState({results: []})
     }
+  }
+
+  search = (event) => {
+    event.persist();
+    this.callAjax(event.target.value)
   }
 
   render() {
@@ -49,7 +50,7 @@ class Search extends React.Component {
             <input
               type="text"
               placeholder="Search by title or author"
-              onChange={(event) => this.search(event.target.value)}
+              onChange={this.search}
             />
           </div>
         </div>
