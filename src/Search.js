@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { debounce } from 'throttle-debounce'
 
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
@@ -14,15 +15,23 @@ class Search extends React.Component {
     shelfChange: PropTypes.func.isRequired
   }
 
+  componentWillMount() {
+    this.callAjax = debounce(500, this.callAjax)
+  }
+  
+  callAjax = (query) => {
+    BooksAPI.search(query, 20).then((results) => {
+      if (results.error) {
+        this.setState({results: results.items})
+      } else {
+        this.setState({results})
+      }
+    })
+  }
+
   search = (query) => {
     if (query !== "") {
-      BooksAPI.search(query, 20).then((results) => {
-        if (results.error) {
-          this.setState({results: results.items})
-        } else {
-          this.setState({results})
-        }
-      })
+      this.callAjax(query)
     } else {
       this.setState({results: []})
     }
