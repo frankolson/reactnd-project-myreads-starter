@@ -12,20 +12,21 @@ class Search extends React.Component {
   }
 
   static propTypes = {
+    books: PropTypes.array.isRequired,
     shelfChange: PropTypes.func.isRequired
   }
 
   componentWillMount() {
     this.callAjax = debounce(500, this.callAjax)
   }
-  
+
   callAjax = (query) => {
     if (query !== "") {
       BooksAPI.search(query, 20).then((results) => {
         if (results.error) {
-          this.setState({results: results.items})
+          this.sortResults(results.items)
         } else {
-          this.setState({results})
+          this.sortResults(results)
         }
       })
     } else {
@@ -36,6 +37,19 @@ class Search extends React.Component {
   search = (event) => {
     event.persist();
     this.callAjax(event.target.value)
+  }
+
+  sortResults = (results) => {
+    this.setState({
+      results: results.map((result) => {
+        for (const book of this.props.books) {
+          if (result.title === book.title) {
+            result = book
+          }
+        }
+        return result
+      })
+    })
   }
 
   render() {
